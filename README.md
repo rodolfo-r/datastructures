@@ -13,3 +13,12 @@ Linked List
 - Each
 - Map
 
+Queue
+- New
+- Enqueue
+- Dequeue
+
+Stack
+- New
+- Push
+- Pop
