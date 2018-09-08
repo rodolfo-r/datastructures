@@ -3,7 +3,7 @@ package doubly_test
 import (
 	"testing"
 
-	"github.com/techmexdev/algos/linkedlist/doubly"
+	"github.com/techmexdev/algos/doubly"
 )
 
 var empty, zero, one, two, three,
@@ -103,6 +103,74 @@ func TestPrepend(t *testing.T) {
 			}
 			if !tc.list.Equals(tc.want) {
 				t.Fatalf("have %s, want %s", tc.list, tc.want)
+			}
+		})
+	}
+}
+
+func TestFront(t *testing.T) {
+	tt := []struct {
+		name string
+		list *doubly.List
+		want doubly.Node
+	}{
+		{
+			name: "Empty",
+			list: empty.Copy(),
+			want: doubly.Node{},
+		},
+		{
+			name: "Zero",
+			list: zero.Copy(),
+			want: doubly.Node{Val: 0},
+		},
+		{
+			name: "Zero One",
+			list: zeroOne.Copy(),
+			want: doubly.Node{Val: 0},
+		},
+	}
+
+	for _, tc := range tt {
+		t.Run(tc.name, func(t *testing.T) {
+			f := tc.list.Front()
+
+			if f != f {
+				t.Fatalf("have %#v, want %#v", f, tc.want)
+			}
+		})
+	}
+}
+
+func TestBack(t *testing.T) {
+	tt := []struct {
+		name string
+		list *doubly.List
+		want doubly.Node
+	}{
+		{
+			name: "Empty",
+			list: empty.Copy(),
+			want: doubly.Node{},
+		},
+		{
+			name: "Zero",
+			list: zero.Copy(),
+			want: doubly.Node{Val: 0},
+		},
+		{
+			name: "Zero One",
+			list: zeroOne.Copy(),
+			want: doubly.Node{Val: 1},
+		},
+	}
+
+	for _, tc := range tt {
+		t.Run(tc.name, func(t *testing.T) {
+			f := tc.list.Front()
+
+			if f != f {
+				t.Fatalf("have %#v, want %#v", f, tc.want)
 			}
 		})
 	}

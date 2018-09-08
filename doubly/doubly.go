@@ -115,6 +115,22 @@ func (l *List) Copy() *List {
 	})
 }
 
+// Front returns the first node in the list or nil if there is only root.
+func (l *List) Front() *Node {
+	if l.root.next != &l.root {
+		return l.root.next
+	}
+	return nil
+}
+
+// Back returns the last node in the list or nil if there is only root.
+func (l *List) Back() *Node {
+	if l.root.prev != &l.root {
+		return l.root.prev
+	}
+	return nil
+}
+
 // Equals compares every value in both linked Lists.
 // O(n)
 func (l *List) Equals(l2 *List) bool {
