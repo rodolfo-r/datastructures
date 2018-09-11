@@ -9,16 +9,18 @@ import (
 // Queue represents a queue.
 type Queue struct {
 	list *doubly.List
+	len  int
 }
 
 // New creates a queue from a doubly linked list.
 func New() *Queue {
-	return &Queue{doubly.New()}
+	return &Queue{list: doubly.New()}
 }
 
 // Enqueue adds an element to the queue.
 func (q *Queue) Enqueue(val int) {
 	q.list.Append(val)
+	q.len++
 }
 
 // Dequeue removes the element from the front of the queue.
@@ -30,5 +32,11 @@ func (q *Queue) Dequeue() (int, error) {
 
 	val := f.Val
 	q.list.Delete(f)
+	q.len--
 	return val, nil
+}
+
+// Size returns the length of the list.
+func (q *Queue) Size() int {
+	return q.len
 }

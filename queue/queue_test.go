@@ -35,3 +35,15 @@ func TestDequeue(t *testing.T) {
 	}
 
 }
+
+func TestSize(t *testing.T) {
+	q := queue.New()
+
+	for n := 1; n <= 5; n++ {
+		q.Enqueue(n)
+		if s := q.Size(); s != n {
+			t.Fatalf("have size %v, want %v", s, n)
+		}
+	}
+
+}
