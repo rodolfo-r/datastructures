@@ -40,3 +40,8 @@ func (q *Queue) Dequeue() (int, error) {
 func (q *Queue) Size() int {
 	return q.len
 }
+
+// Front returns the value of the first element.
+func (q *Queue) Front() int {
+	return q.list.Front().Val
+}

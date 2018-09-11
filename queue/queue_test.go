@@ -8,24 +8,23 @@ import (
 
 func TestEnqueue(t *testing.T) {
 	q := queue.New()
-	q.Enqueue(0)
-	q.Enqueue(1)
-	q.Enqueue(2)
+	for n := 1; n <= 5; n++ {
+		q.Enqueue(n)
+	}
 }
 
 func TestDequeue(t *testing.T) {
 	q := queue.New()
-	q.Enqueue(0)
-	q.Enqueue(1)
-	q.Enqueue(2)
+	for n := 1; n <= 5; n++ {
+		q.Enqueue(n)
+	}
 
-	nn := []int{0, 1, 2}
-	for i := 0; i < len(nn); i++ {
+	for want := 1; want <= 5; want++ {
 		n, err := q.Dequeue()
 		if err != nil {
 			t.Fatalf("have error %s, want nil", err)
-		} else if n != nn[i] {
-			t.Fatalf("have dequeued number %v, want %v", n, nn[i])
+		} else if n != want {
+			t.Fatalf("have dequeued number %v, want %v", n, want)
 		}
 	}
 
@@ -45,5 +44,19 @@ func TestSize(t *testing.T) {
 			t.Fatalf("have size %v, want %v", s, n)
 		}
 	}
+}
 
+func TestFront(t *testing.T) {
+	q := queue.New()
+
+	for n := 1; n <= 5; n++ {
+		q.Enqueue(n)
+	}
+
+	for n := 1; n <= 5; n++ {
+		if f := q.Front(); f != n {
+			t.Fatalf("have front %v, want %v", f, n)
+		}
+		q.Dequeue()
+	}
 }
