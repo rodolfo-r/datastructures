@@ -4,11 +4,14 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+
+	"github.com/techmexdev/algos/dictionary"
 )
 
 // List is a doubly Linked list.
 type List struct {
 	root Node // sentinel list element
+	dictionary.Dictionary
 }
 
 // Node is linked List node.

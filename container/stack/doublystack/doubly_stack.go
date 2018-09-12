@@ -1,19 +1,21 @@
-package stack
+package doublystack
 
 import (
 	"errors"
 
-	"github.com/techmexdev/algos/doubly"
+	"github.com/techmexdev/algos/container/stack"
+	"github.com/techmexdev/algos/dictionary/doubly"
 )
 
 // Stack represents a stack.
 type Stack struct {
 	list *doubly.List
+	stack.Stack
 }
 
 // New creates a stack from a doubly linked list.
 func New() *Stack {
-	return &Stack{doubly.New()}
+	return &Stack{list: doubly.New()}
 }
 
 // Push adds an element to the stack.

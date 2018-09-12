@@ -1,20 +1,20 @@
-package stack
+package doublystack_test
 
 import (
 	"testing"
 
-	"github.com/techmexdev/algos/stack"
+	"github.com/techmexdev/algos/container/stack/doublystack"
 )
 
 func TestPush(t *testing.T) {
-	s := stack.New()
+	s := doublystack.New()
 	s.Push(0)
 	s.Push(1)
 	s.Push(2)
 }
 
 func TestPop(t *testing.T) {
-	s := stack.New()
+	s := doublystack.New()
 	s.Push(0)
 	s.Push(1)
 	s.Push(2)

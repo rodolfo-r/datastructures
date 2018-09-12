@@ -1,20 +1,20 @@
-package queue
+package doublyqueue_test
 
 import (
 	"testing"
 
-	"github.com/techmexdev/algos/queue"
+	"github.com/techmexdev/algos/container/queue/doublyqueue"
 )
 
 func TestEnqueue(t *testing.T) {
-	q := queue.New()
+	q := doublyqueue.New()
 	for n := 1; n <= 5; n++ {
 		q.Enqueue(n)
 	}
 }
 
 func TestDequeue(t *testing.T) {
-	q := queue.New()
+	q := doublyqueue.New()
 	for n := 1; n <= 5; n++ {
 		q.Enqueue(n)
 	}
@@ -36,7 +36,7 @@ func TestDequeue(t *testing.T) {
 }
 
 func TestSize(t *testing.T) {
-	q := queue.New()
+	q := doublyqueue.New()
 
 	for n := 1; n <= 5; n++ {
 		q.Enqueue(n)
@@ -47,7 +47,7 @@ func TestSize(t *testing.T) {
 }
 
 func TestFront(t *testing.T) {
-	q := queue.New()
+	q := doublyqueue.New()
 
 	for n := 1; n <= 5; n++ {
 		q.Enqueue(n)

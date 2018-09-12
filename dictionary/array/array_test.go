@@ -4,7 +4,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/techmexdev/algos/array"
+	"github.com/techmexdev/algos/dictionary/array"
 )
 
 func TestNew(t *testing.T) {

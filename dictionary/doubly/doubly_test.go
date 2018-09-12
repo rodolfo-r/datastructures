@@ -3,7 +3,7 @@ package doubly_test
 import (
 	"testing"
 
-	"github.com/techmexdev/algos/doubly"
+	"github.com/techmexdev/algos/dictionary/doubly"
 )
 
 var empty, zero, one, two, three,
