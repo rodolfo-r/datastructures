@@ -3,7 +3,6 @@ package doublyqueue
 import (
 	"errors"
 
-	"github.com/techmexdev/algos/container/queue"
 	"github.com/techmexdev/algos/dictionary/doubly"
 )
 
@@ -11,7 +10,6 @@ import (
 type Queue struct {
 	list *doubly.List
 	len  int
-	queue.Queue
 }
 
 // New creates a queue from a doubly linked list.

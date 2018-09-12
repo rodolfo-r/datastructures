@@ -2,14 +2,11 @@ package array
 
 import (
 	"fmt"
-
-	"github.com/techmexdev/algos/dictionary"
 )
 
 // Array represents an array list.
 type Array struct {
 	list []int
-	dictionary.Dictionary
 }
 
 const growthFactor = 2

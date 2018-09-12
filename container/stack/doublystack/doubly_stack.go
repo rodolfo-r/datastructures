@@ -3,14 +3,12 @@ package doublystack
 import (
 	"errors"
 
-	"github.com/techmexdev/algos/container/stack"
 	"github.com/techmexdev/algos/dictionary/doubly"
 )
 
 // Stack represents a stack.
 type Stack struct {
 	list *doubly.List
-	stack.Stack
 }
 
 // New creates a stack from a doubly linked list.
