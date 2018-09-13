@@ -2,18 +2,12 @@ package doubly
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 )
 
-// List is a doubly Linked list.
-type List struct {
-	root Node // sentinel list element
-}
-
 // Node is linked List node.
 type Node struct {
-	Val        int
+	Value      interface{}
 	prev, next *Node
 	list       *List
 }
@@ -34,6 +28,11 @@ func (n *Node) Next() *Node {
 	return nil
 }
 
+// List is an unorderd doubly Linked list.
+type List struct {
+	root Node // sentinel list element
+}
+
 // New creates a Linked List
 func New() *List {
 	l := &List{}
@@ -42,37 +41,33 @@ func New() *List {
 	return l
 }
 
-// Insert inserts n after at, and returns n.
-func (l *List) Insert(n, at *Node) *Node {
-	next := at.next
-	at.next = n
-	n.list, n.prev, n.next = l, at, next
-	next.prev = n
-
-	return n
-}
-
 // Append adds a node to the tail of a linked List.
 // O(1)
-func (l *List) Append(val int) *Node {
-	return l.Insert(&Node{Val: val}, l.root.prev)
+func (l *List) Append(value interface{}) *Node {
+	return l.insertAfter(&Node{Value: value}, l.root.prev)
 }
 
 // Prepend adds a node to the front of a Linked List.
 // O(1)
-func (l *List) Prepend(val int) *Node {
-	return l.Insert(&Node{Val: val}, &l.root)
+func (l *List) Prepend(value interface{}) *Node {
+	return l.insertAfter(&Node{Value: value}, &l.root)
 }
 
-// Search looks for a node that has a value.
+// Search looks for a node that has a value, and returns false if not found.
 // O(n) time
-func (l *List) Search(val int) (*Node, error) {
+func (l *List) Search(value interface{}) (*Node, bool) {
 	for n := l.root.next; n != &l.root; n = n.next {
-		if n.Val == val {
-			return n, nil
+		if n.Value == value {
+			return n, true
 		}
 	}
-	return &Node{}, fmt.Errorf("Node with value %v not in list", val)
+	return &Node{}, false
+}
+
+// Get retrieves a node's value.
+// O(n) time
+func (l *List) Get(n *Node) (value interface{}) {
+	return n.Value
 }
 
 // Delete removes a node from its Linked List.
@@ -100,18 +95,18 @@ func (l *List) Each(fun func(*Node)) {
 }
 
 // Map returns a copy of every node value applied to a function.
-func (l *List) Map(fun func(int) int) *List {
+func (l *List) Map(fun func(interface{}) interface{}) *List {
 	mapped := New()
 	l.Each(func(n *Node) {
-		mapped.Append(fun(n.Val))
+		mapped.Append(fun(n.Value))
 	})
 	return mapped
 }
 
 // Copy returns a copy of a linked List.
 func (l *List) Copy() *List {
-	return l.Map(func(num int) int {
-		return num
+	return l.Map(func(value interface{}) interface{} {
+		return value
 	})
 }
 
@@ -135,7 +130,7 @@ func (l *List) Back() *Node {
 // O(n)
 func (l *List) Equals(l2 *List) bool {
 	for n, n2 := l.root.next, l2.root.next; n != &l.root || n2 != &l2.root; n, n2 = n.next, n2.next {
-		if n == &l.root || n2 == &l2.root || n.Val != n2.Val {
+		if n == &l.root || n2 == &l2.root || n.Value != n2.Value {
 			return false
 		}
 	}
@@ -146,8 +141,17 @@ func (l *List) Equals(l2 *List) bool {
 func (l *List) String() string {
 	var strs []string
 	for n := l.root.next; n != &l.root; n = n.next {
-		strs = append(strs, strconv.Itoa(n.Val))
+		strs = append(strs, fmt.Sprintf("%+v", n.Value))
 	}
 
 	return strings.Join(strs, " <--> ")
+}
+
+func (l *List) insertAfter(n, at *Node) *Node {
+	next := at.next
+	at.next = n
+	n.list, n.prev, n.next = l, at, next
+	next.prev = n
+
+	return n
 }

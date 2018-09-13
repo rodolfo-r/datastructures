@@ -1,9 +1,10 @@
 package doubly_test
 
 import (
+	"log"
 	"testing"
 
-	"github.com/techmexdev/algos/dictionary/doubly"
+	"github.com/techmexdev/algos/list/linked/doubly"
 )
 
 var empty, zero, one, two, three,
@@ -122,12 +123,12 @@ func TestFront(t *testing.T) {
 		{
 			name: "Zero",
 			list: zero.Copy(),
-			want: doubly.Node{Val: 0},
+			want: doubly.Node{Value: 0},
 		},
 		{
 			name: "Zero One",
 			list: zeroOne.Copy(),
-			want: doubly.Node{Val: 0},
+			want: doubly.Node{Value: 0},
 		},
 	}
 
@@ -156,12 +157,12 @@ func TestBack(t *testing.T) {
 		{
 			name: "Zero",
 			list: zero.Copy(),
-			want: doubly.Node{Val: 0},
+			want: doubly.Node{Value: 0},
 		},
 		{
 			name: "Zero One",
 			list: zeroOne.Copy(),
-			want: doubly.Node{Val: 1},
+			want: doubly.Node{Value: 1},
 		},
 	}
 
@@ -181,38 +182,38 @@ func TestSearch(t *testing.T) {
 		name string
 		list *doubly.List
 		val  int
-		err  bool
+		ok   bool
 	}{
 		{
 			name: "Search for one in empty",
 			list: empty.Copy(),
 			val:  1,
-			err:  true,
+			ok:   false,
 		},
 		{
 			name: "Search for one in one",
 			list: one.Copy(),
 			val:  1,
-			err:  false,
+			ok:   true,
 		},
 		{
 			name: "Search for one in zero one two",
 			list: zeroOneTwo.Copy(),
 			val:  1,
-			err:  false,
+			ok:   true,
 		},
 	}
 
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
-			n, err := tc.list.Search(tc.val)
-
-			if err != nil {
-				if !tc.err {
-					t.Fatalf("have error %s, want nil", err)
-				}
-			} else if n.Val != tc.val {
-				t.Fatalf("have %v, want %v", n.Val, tc.val)
+			if n, ok := tc.list.Search(tc.val); ok != tc.ok {
+				t.Fatalf("could not find %v in list", tc.val)
+			} else if !tc.ok && !ok {
+				return
+			} else if n.Value != tc.val {
+				log.Printf("tc.ok = %+v\n", tc.ok)
+				log.Printf("ok: %v", ok)
+				t.Fatalf("have %v, want %v", n.Value, tc.val)
 			}
 		})
 	}
@@ -253,14 +254,13 @@ func TestDelete(t *testing.T) {
 
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
-			n, err := tc.list.Search(tc.val)
-			if err != nil {
-				t.Fatalf("failed searching for %v: %s", tc.val, err)
-			}
-
-			tc.list.Delete(n)
-			if !tc.list.Equals(tc.want) {
-				t.Fatalf("have %s, want %s", tc.list, tc.want)
+			if n, ok := tc.list.Search(tc.val); !ok {
+				t.Fatalf("failed searching for %v", tc.val)
+			} else {
+				tc.list.Delete(n)
+				if !tc.list.Equals(tc.want) {
+					t.Fatalf("have %s, want %s", tc.list, tc.want)
+				}
 			}
 		})
 	}
@@ -319,13 +319,13 @@ func TestEach(t *testing.T) {
 		{
 			name: "Set each node val to 0",
 			list: zeroOneTwo.Copy(),
-			fun:  func(n *doubly.Node) { n.Val = 0 },
+			fun:  func(n *doubly.Node) { n.Value = 0 },
 			want: zeroZeroZero,
 		},
 		{
 			name: "Multiply each node val by 10",
 			list: zeroOneTwo.Copy(),
-			fun:  func(n *doubly.Node) { n.Val *= 10 },
+			fun:  func(n *doubly.Node) { n.Value = n.Value.(int) * 10 },
 			want: zeroTenTwenty,
 		},
 	}
@@ -354,20 +354,20 @@ func TestMap(t *testing.T) {
 	tt := []struct {
 		name         string
 		list         *doubly.List
-		fun          func(int) int
+		fun          func(interface{}) interface{}
 		want, mapped *doubly.List
 	}{
 		{
 			name:   "Map each node val to 0",
 			list:   zeroOneTwo.Copy(),
-			fun:    func(num int) int { return 0 },
+			fun:    func(val interface{}) interface{} { return 0 },
 			want:   zeroOneTwo.Copy(),
 			mapped: zeroZeroZero.Copy(),
 		},
 		{
 			name:   "Map Multiply each node val by 10",
 			list:   zeroOneTwo.Copy(),
-			fun:    func(num int) int { return num * 10 },
+			fun:    func(val interface{}) interface{} { return val.(int) * 10 },
 			want:   zeroOneTwo,
 			mapped: zeroTenTwenty.Copy(),
 		},

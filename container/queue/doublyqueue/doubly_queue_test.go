@@ -20,17 +20,15 @@ func TestDequeue(t *testing.T) {
 	}
 
 	for want := 1; want <= 5; want++ {
-		n, err := q.Dequeue()
-		if err != nil {
-			t.Fatalf("have error %s, want nil", err)
+		if n, ok := q.Dequeue(); !ok {
+			t.Fatalf("expected successful dequeue")
 		} else if n != want {
 			t.Fatalf("have dequeued number %v, want %v", n, want)
 		}
 	}
 
-	_, err := q.Dequeue()
-	if err == nil {
-		t.Fatal("have nil error, want non-nil")
+	if _, ok := q.Dequeue(); ok {
+		t.Fatalf("expected unsuccessful dequeue")
 	}
 
 }

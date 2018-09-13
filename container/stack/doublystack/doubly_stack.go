@@ -1,9 +1,7 @@
 package doublystack
 
 import (
-	"errors"
-
-	"github.com/techmexdev/algos/dictionary/doubly"
+	"github.com/techmexdev/algos/list/linked/doubly"
 )
 
 // Stack represents a stack.
@@ -17,18 +15,18 @@ func New() *Stack {
 }
 
 // Push adds an element to the stack.
-func (s *Stack) Push(val int) {
-	s.list.Append(val)
+func (s *Stack) Push(value interface{}) {
+	s.list.Append(value)
 }
 
 // Pop removes the last inserted element.
-func (s *Stack) Pop() (int, error) {
+func (s *Stack) Pop() (value interface{}, ok bool) {
 	b := s.list.Back()
 	if b == nil {
-		return 0, errors.New("no more elements in stack")
+		return nil, false
 	}
 
-	val := b.Val
+	val := b.Value
 	s.list.Delete(b)
-	return val, nil
+	return val, true
 }

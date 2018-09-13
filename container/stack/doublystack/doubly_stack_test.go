@@ -21,17 +21,14 @@ func TestPop(t *testing.T) {
 
 	nn := []int{2, 1, 0}
 	for i := 0; i < len(nn); i++ {
-		n, err := s.Pop()
-		if err != nil {
-			t.Fatalf("have error %s, want nil", err)
+		if n, ok := s.Pop(); !ok {
+			t.Fatal("expected successful pop")
 		} else if n != nn[i] {
 			t.Fatalf("have popped number %v, want %v", n, nn[i])
 		}
 	}
 
-	_, err := s.Pop()
-	if err == nil {
-		t.Fatal("have nil error, want non-nil")
+	if _, ok := s.Pop(); ok {
+		t.Fatal("expected unsuccessful pop")
 	}
-
 }
