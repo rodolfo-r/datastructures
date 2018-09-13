@@ -1,9 +1,9 @@
-package array_test
+package sortedarray_test
 
 import (
 	"testing"
 
-	"github.com/techmexdev/algos/list/array"
+	"github.com/techmexdev/datastructures/list/contiguos/array"
 )
 
 func TestNew(t *testing.T) {
@@ -19,30 +19,30 @@ func TestInsert(t *testing.T) {
 
 func TestSearch(t *testing.T) {
 	arr := array.New()
-	for n := 0; n < 12; n++ {
+	for n := 11; n >= 0; n-- {
 		arr.Insert(n)
 	}
 
 	for n := 0; n < 12; n++ {
 		if i, ok := arr.Search(n); !ok {
 			t.Fatalf("expected to find %v", n)
-		} else if i != n {
-			t.Fatalf("have index: %v, want %v", i, n)
+		} else if index := 11 - n; i != index {
+			t.Fatalf("have index: %v, want %v", i, index)
 		}
 	}
 }
 
 func TestGet(t *testing.T) {
 	arr := array.New()
-	for n := 0; n < 12; n++ {
+	for n := 11; n >= 0; n-- {
 		arr.Insert(n)
 	}
 
-	for n := 0; n < 12; n++ {
-		if num, ok := arr.Get(n); !ok {
+	for i := 0; i < 12; i++ {
+		if n, ok := arr.Get(i); !ok {
 			t.Fatalf("expected successful get at index %v", n)
-		} else if n != num {
-			t.Fatalf("have num: %v, want %v", num, n)
+		} else if num := 11 - i; num != n {
+			t.Fatalf("have num: %v, want %v", n, num)
 		}
 	}
 }

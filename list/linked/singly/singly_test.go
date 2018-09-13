@@ -1,18 +1,18 @@
-package doubly_test
+package singly_test
 
 import (
 	"log"
 	"testing"
 
-	"github.com/techmexdev/datastructures/list/linked/doubly"
+	"github.com/techmexdev/datastructures/list/linked/singly"
 )
 
 var empty, zero, one, two, three,
 	zeroOne, oneTwo, zeroTwo, twoOne, oneZero,
-	zeroOneTwo, twoOneZero *doubly.List
+	zeroOneTwo, twoOneZero *singly.List
 
 func init() {
-	empty, zero, one, two = doubly.New(), doubly.New(), doubly.New(), doubly.New()
+	empty, zero, one, two = singly.New(), singly.New(), singly.New(), singly.New()
 
 	zero.Append(0)
 	one.Append(1)
@@ -34,9 +34,9 @@ func init() {
 func TestAppend(t *testing.T) {
 	tt := []struct {
 		name string
-		list *doubly.List
+		list *singly.List
 		vals []int
-		want *doubly.List
+		want *singly.List
 	}{
 		{
 			name: "Append one and two to empty",
@@ -70,65 +70,26 @@ func TestAppend(t *testing.T) {
 	}
 }
 
-func TestPrepend(t *testing.T) {
-	tt := []struct {
-		name string
-		list *doubly.List
-		vals []int
-		want *doubly.List
-	}{
-		{
-			name: "Prepend two and one to empty",
-			list: empty.Copy(),
-			vals: []int{2, 1},
-			want: oneTwo,
-		},
-		{
-			name: "Prepend one and zero to two",
-			list: two.Copy(),
-			vals: []int{1, 0},
-			want: zeroOneTwo,
-		},
-		{
-			name: "Prepend zero to one and two",
-			list: oneTwo.Copy(),
-			vals: []int{0},
-			want: zeroOneTwo,
-		},
-	}
-
-	for _, tc := range tt {
-		t.Run(tc.name, func(t *testing.T) {
-			for i := 0; i < len(tc.vals); i++ {
-				tc.list.Prepend(tc.vals[i])
-			}
-			if !tc.list.Equals(tc.want) {
-				t.Fatalf("have %s, want %s", tc.list, tc.want)
-			}
-		})
-	}
-}
-
 func TestFront(t *testing.T) {
 	tt := []struct {
 		name string
-		list *doubly.List
-		want doubly.Node
+		list *singly.List
+		want singly.Node
 	}{
 		{
 			name: "Empty",
 			list: empty.Copy(),
-			want: doubly.Node{},
+			want: singly.Node{},
 		},
 		{
 			name: "Zero",
 			list: zero.Copy(),
-			want: doubly.Node{Value: 0},
+			want: singly.Node{Value: 0},
 		},
 		{
 			name: "Zero One",
 			list: zeroOne.Copy(),
-			want: doubly.Node{Value: 0},
+			want: singly.Node{Value: 0},
 		},
 	}
 
@@ -146,23 +107,23 @@ func TestFront(t *testing.T) {
 func TestBack(t *testing.T) {
 	tt := []struct {
 		name string
-		list *doubly.List
-		want doubly.Node
+		list *singly.List
+		want singly.Node
 	}{
 		{
 			name: "Empty",
 			list: empty.Copy(),
-			want: doubly.Node{},
+			want: singly.Node{},
 		},
 		{
 			name: "Zero",
 			list: zero.Copy(),
-			want: doubly.Node{Value: 0},
+			want: singly.Node{Value: 0},
 		},
 		{
 			name: "Zero One",
 			list: zeroOne.Copy(),
-			want: doubly.Node{Value: 1},
+			want: singly.Node{Value: 1},
 		},
 	}
 
@@ -180,7 +141,7 @@ func TestBack(t *testing.T) {
 func TestSearch(t *testing.T) {
 	tt := []struct {
 		name string
-		list *doubly.List
+		list *singly.List
 		val  int
 		ok   bool
 	}{
@@ -222,9 +183,9 @@ func TestSearch(t *testing.T) {
 func TestDelete(t *testing.T) {
 	tt := []struct {
 		name string
-		list *doubly.List
+		list *singly.List
 		val  int
-		want *doubly.List
+		want *singly.List
 	}{
 		{
 			name: "Delete zero from zero",
@@ -269,8 +230,8 @@ func TestDelete(t *testing.T) {
 func TestReverse(t *testing.T) {
 	tt := []struct {
 		name string
-		list *doubly.List
-		want *doubly.List
+		list *singly.List
+		want *singly.List
 	}{
 		{
 			name: "Empty",
@@ -300,32 +261,32 @@ func TestReverse(t *testing.T) {
 }
 
 func TestEach(t *testing.T) {
-	zeroZeroZero := doubly.New()
+	zeroZeroZero := singly.New()
 	zeroZeroZero.Append(0)
 	zeroZeroZero.Append(0)
 	zeroZeroZero.Append(0)
 
-	zeroTenTwenty := doubly.New()
+	zeroTenTwenty := singly.New()
 	zeroTenTwenty.Append(0)
 	zeroTenTwenty.Append(10)
 	zeroTenTwenty.Append(20)
 
 	tt := []struct {
 		name string
-		list *doubly.List
-		fun  func(*doubly.Node)
-		want *doubly.List
+		list *singly.List
+		fun  func(*singly.Node)
+		want *singly.List
 	}{
 		{
 			name: "Set each node val to 0",
 			list: zeroOneTwo.Copy(),
-			fun:  func(n *doubly.Node) { n.Value = 0 },
+			fun:  func(n *singly.Node) { n.Value = 0 },
 			want: zeroZeroZero,
 		},
 		{
 			name: "Multiply each node val by 10",
 			list: zeroOneTwo.Copy(),
-			fun:  func(n *doubly.Node) { n.Value = n.Value.(int) * 10 },
+			fun:  func(n *singly.Node) { n.Value = n.Value.(int) * 10 },
 			want: zeroTenTwenty,
 		},
 	}
@@ -341,21 +302,21 @@ func TestEach(t *testing.T) {
 }
 
 func TestMap(t *testing.T) {
-	zeroZeroZero := doubly.New()
+	zeroZeroZero := singly.New()
 	zeroZeroZero.Append(0)
 	zeroZeroZero.Append(0)
 	zeroZeroZero.Append(0)
 
-	zeroTenTwenty := doubly.New()
+	zeroTenTwenty := singly.New()
 	zeroTenTwenty.Append(0)
 	zeroTenTwenty.Append(10)
 	zeroTenTwenty.Append(20)
 
 	tt := []struct {
 		name         string
-		list         *doubly.List
+		list         *singly.List
 		fun          func(interface{}) interface{}
-		want, mapped *doubly.List
+		want, mapped *singly.List
 	}{
 		{
 			name:   "Map each node val to 0",
