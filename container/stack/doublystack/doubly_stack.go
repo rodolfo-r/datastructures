@@ -1,12 +1,17 @@
 package doublystack
 
 import (
-	"github.com/rodolfo-r/algos/list/linked/doubly"
+	"github.com/rodolfo-r/datastructures"
+	"github.com/rodolfo-r/datastructures/list/linked/doubly"
 )
 
 // Stack represents a stack.
 type Stack struct {
 	list *doubly.List
+}
+
+func assertStackImplementation() {
+	var _ datastructures.Stack = (*Stack)(nil)
 }
 
 // New creates a stack from a doubly linked list.

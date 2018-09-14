@@ -3,7 +3,7 @@ package binaryheap
 import (
 	"log"
 
-	"github.com/rodolfo-r/datastructures/container/priorityqueue"
+	"github.com/rodolfo-r/datastructures"
 )
 
 // MinHeap is a min binary heap.
@@ -18,7 +18,7 @@ type MinNode struct {
 }
 
 func assertPriorityQueueImplementation() {
-	var _ priorityqueue.PriorityQueue = (*MinHeap)(nil)
+	var _ datastructures.PriorityQueue = (*MinHeap)(nil)
 }
 
 // NewMin creates a MinHeap.

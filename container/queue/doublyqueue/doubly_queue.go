@@ -1,8 +1,8 @@
 package doublyqueue
 
 import (
-	"github.com/rodolfo-r/algos/container/queue"
-	"github.com/rodolfo-r/algos/list/linked/doubly"
+	"github.com/rodolfo-r/datastructures"
+	"github.com/rodolfo-r/datastructures/list/linked/doubly"
 )
 
 // Queue represents a queue.
@@ -12,7 +12,7 @@ type Queue struct {
 }
 
 func assertQueueImplementation() {
-	var _ queue.Queue = (*Queue)(nil)
+	var _ datastructures.Queue = (*Queue)(nil)
 }
 
 // New creates a queue from a doubly linked list.

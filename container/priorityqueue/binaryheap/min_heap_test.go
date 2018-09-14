@@ -3,12 +3,12 @@ package binaryheap_test
 import (
 	"testing"
 
-	"github.com/rodolfo-r/datastructures/container/priorityqueue"
+	"github.com/rodolfo-r/datastructures"
 	"github.com/rodolfo-r/datastructures/container/priorityqueue/binaryheap"
 )
 
 func TestInsert(t *testing.T) {
-	var pq priorityqueue.PriorityQueue = binaryheap.NewMin()
+	var pq datastructures.PriorityQueue = binaryheap.NewMin()
 
 	nn := []int{5, 2, 1, 3, 4}
 	for _, n := range nn {
@@ -17,7 +17,7 @@ func TestInsert(t *testing.T) {
 }
 
 func TestMin(t *testing.T) {
-	var pq priorityqueue.PriorityQueue = binaryheap.NewMin()
+	var pq datastructures.PriorityQueue = binaryheap.NewMin()
 
 	nn := []int{5, 2, 1, 3, 4}
 	for _, n := range nn {
@@ -32,7 +32,7 @@ func TestMin(t *testing.T) {
 }
 
 func TestExtractMin(t *testing.T) {
-	var pq priorityqueue.PriorityQueue = binaryheap.NewMin()
+	var pq datastructures.PriorityQueue = binaryheap.NewMin()
 
 	nn := []int{5, 2, 1, 3, 4}
 	for _, n := range nn {
