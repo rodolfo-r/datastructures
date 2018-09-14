@@ -4,7 +4,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/techmexdev/datastructures/list/linked/singly"
+	"github.com/rodolfo-r/datastructures/list/linked/singly"
 )
 
 var empty, zero, one, two, three,

@@ -4,7 +4,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/techmexdev/datastructures/list/linked/doubly"
+	"github.com/rodolfo-r/datastructures/list/linked/doubly"
 )
 
 var empty, zero, one, two, three,

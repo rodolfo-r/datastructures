@@ -3,7 +3,7 @@ package doublystack_test
 import (
 	"testing"
 
-	"github.com/techmexdev/algos/container/stack/doublystack"
+	"github.com/rodolfo-r/algos/container/stack/doublystack"
 )
 
 func TestPush(t *testing.T) {

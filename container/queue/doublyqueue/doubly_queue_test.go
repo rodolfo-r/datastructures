@@ -3,7 +3,7 @@ package doublyqueue_test
 import (
 	"testing"
 
-	"github.com/techmexdev/algos/container/queue/doublyqueue"
+	"github.com/rodolfo-r/algos/container/queue/doublyqueue"
 )
 
 func TestEnqueue(t *testing.T) {

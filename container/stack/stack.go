@@ -1,6 +1,6 @@
 package stack
 
-import "github.com/techmexdev/algos/container"
+import "github.com/rodolfo-r/algos/container"
 
 // Stack is a LIFO container.
 type Stack interface {

@@ -1,8 +1,8 @@
 package doublyqueue
 
 import (
-	"github.com/techmexdev/algos/container/queue"
-	"github.com/techmexdev/algos/list/linked/doubly"
+	"github.com/rodolfo-r/algos/container/queue"
+	"github.com/rodolfo-r/algos/list/linked/doubly"
 )
 
 // Queue represents a queue.

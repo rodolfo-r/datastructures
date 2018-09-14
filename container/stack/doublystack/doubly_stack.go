@@ -1,7 +1,7 @@
 package doublystack
 
 import (
-	"github.com/techmexdev/algos/list/linked/doubly"
+	"github.com/rodolfo-r/algos/list/linked/doubly"
 )
 
 // Stack represents a stack.

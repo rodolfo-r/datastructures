@@ -3,7 +3,7 @@ package array_test
 import (
 	"testing"
 
-	"github.com/techmexdev/datastructures/list/contiguos/array"
+	"github.com/rodolfo-r/datastructures/list/contiguos/array"
 )
 
 func TestNew(t *testing.T) {

@@ -1,6 +1,6 @@
 package queue
 
-import "github.com/techmexdev/algos/container"
+import "github.com/rodolfo-r/algos/container"
 
 // Queue is a FIFO container.
 type Queue interface {
