@@ -7,8 +7,8 @@ import (
 	"github.com/rodolfo-r/datastructures/container/priorityqueue/binaryheap"
 )
 
-func TestMinEnqueue(t *testing.T) {
-	var pq datastructures.PriorityQueue = binaryheap.NewMin()
+func TestMaxEnqueue(t *testing.T) {
+	var pq datastructures.PriorityQueue = binaryheap.NewMax()
 
 	nn := []int{5, 2, 1, 3, 4}
 	for _, n := range nn {
@@ -16,8 +16,8 @@ func TestMinEnqueue(t *testing.T) {
 	}
 }
 
-func TestMinPeek(t *testing.T) {
-	var pq datastructures.PriorityQueue = binaryheap.NewMin()
+func TestMaxPeek(t *testing.T) {
+	var pq datastructures.PriorityQueue = binaryheap.NewMax()
 
 	nn := []int{5, 2, 1, 3, 4}
 	for _, n := range nn {
@@ -26,25 +26,25 @@ func TestMinPeek(t *testing.T) {
 
 	if n, ok := pq.Peek(); !ok {
 		t.Fatalf("expected to be ok")
-	} else if n != 1 {
+	} else if n != 5 {
 		t.Fatalf("have n %v, want %v", n, 1)
 	}
 }
 
-func TestMinDequeue(t *testing.T) {
-	var pq datastructures.PriorityQueue = binaryheap.NewMin()
+func TestMaxDequeue(t *testing.T) {
+	var pq datastructures.PriorityQueue = binaryheap.NewMax()
 
 	nn := []int{5, 2, 1, 3, 4}
 	for _, n := range nn {
 		pq.Enqueue(n)
 	}
 
-	mins := []int{1, 2, 3, 4, 5}
-	for i := 0; i < len(mins); i++ {
+	maxes := []int{5, 4, 3, 2, 1}
+	for i := 0; i < len(maxes); i++ {
 		if n, ok := pq.Dequeue(); !ok {
 			t.Fatalf("expected to be ok")
-		} else if n != mins[i] {
-			t.Fatalf("have n: %v, want %v", n, mins[i])
+		} else if n != maxes[i] {
+			t.Fatalf("have n: %v, want %v", n, maxes[i])
 		}
 	}
 }

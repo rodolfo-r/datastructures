@@ -17,7 +17,7 @@ type MinNode struct {
 	Value int
 }
 
-func assertPriorityQueueImplementation() {
+func assertPriorityQueueMinHeapImplementation() {
 	var _ datastructures.PriorityQueue = (*MinHeap)(nil)
 }
 
@@ -26,9 +26,9 @@ func NewMin() *MinHeap {
 	return &MinHeap{lastPos: -1}
 }
 
-// Insert inserts an element to MinHeap.
+// Enqueue inserts an element to MinHeap.
 // O(log n)
-func (h *MinHeap) Insert(value int) {
+func (h *MinHeap) Enqueue(value int) {
 	h.list = append(h.list, value)
 	h.lastPos++
 	h.trickleUp(h.lastPos)
@@ -45,18 +45,18 @@ func (h *MinHeap) trickleUp(index int) {
 	}
 }
 
-// Min retrieves the smallest number
+// Peek retrieves the smallest number
 // O(1)
-func (h *MinHeap) Min() (int, bool) {
+func (h *MinHeap) Peek() (int, bool) {
 	if h.lastPos > -1 {
 		return h.list[0], true
 	}
 	return 0, false
 }
 
-// ExtractMin retrieves the smallest number, and deletes it
+// Dequeue retrieves the smallest number, and deletes it
 // O(log n)
-func (h *MinHeap) ExtractMin() (int, bool) {
+func (h *MinHeap) Dequeue() (int, bool) {
 	log.Printf("h.list = %+v\n", h.list)
 	if h.lastPos < 0 {
 		return 0, false
