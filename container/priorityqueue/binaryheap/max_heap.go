@@ -24,6 +24,15 @@ func NewMax() *MaxHeap {
 	return &MaxHeap{lastPos: -1}
 }
 
+// BuildMax creates a MaxHeap from nums.
+func BuildMax(nums []int) *MaxHeap {
+	h := &MaxHeap{List: nums, lastPos: len(nums) - 1}
+	for i := h.lastPos; i >= 0; i-- {
+		h.trickleDown(i)
+	}
+	return h
+}
+
 // Enqueue inserts an element to MaxHeap.
 // O(log n)
 func (h *MaxHeap) Enqueue(value int) {
@@ -66,8 +75,8 @@ func (h *MaxHeap) Dequeue() (int, bool) {
 	h.List[0], h.List[h.lastPos] = h.List[h.lastPos], h.List[0]
 	h.lastPos--
 	h.trickleDown(0)
-	return h.List[h.lastPos+1], true
 
+	return h.List[h.lastPos+1], true
 }
 
 func (h *MaxHeap) trickleDown(index int) {
