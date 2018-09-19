@@ -31,6 +31,7 @@ func (n *Node) Next() *Node {
 // List is an unorderd doubly Linked list.
 type List struct {
 	root Node // sentinel list element
+	len  int
 }
 
 // New creates a Linked List
@@ -75,6 +76,18 @@ func (l *List) Get(n *Node) (value interface{}) {
 func (l *List) Delete(n *Node) {
 	n.prev.next, n.next.prev = n.next, n.prev
 	n.prev, n.next, n.list = nil, nil, nil
+	l.len--
+}
+
+// Size returns the length of l.
+func (l *List) Size() int {
+	return l.len
+}
+
+// Empty checks wether the length
+// of the list is 0
+func (l *List) Empty() bool {
+	return l.len == 0
 }
 
 // Reverse reverses all nodes following node head.
@@ -153,5 +166,6 @@ func (l *List) insertAfter(n, at *Node) *Node {
 	n.list, n.prev, n.next = l, at, next
 	next.prev = n
 
+	l.len++
 	return n
 }
