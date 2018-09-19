@@ -35,3 +35,14 @@ func (s *Stack) Pop() (value interface{}, ok bool) {
 	s.list.Delete(b)
 	return val, true
 }
+
+// Size returns the length of s.list.
+func (s *Stack) Size() int {
+	return s.list.Size()
+}
+
+// Empty checks if there are no more
+// items in the list.
+func (s *Stack) Empty() bool {
+	return s.list.Empty()
+}
